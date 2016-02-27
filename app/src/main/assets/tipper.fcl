@@ -1,0 +1,47 @@
+
+FUNCTION_BLOCK tipper	// Block definition (there may be more than one block per file)
+
+// Define input variables
+VAR_INPUT
+	color : REAL;
+END_VAR
+
+// Define output variable
+VAR_OUTPUT
+	weight : REAL;
+END_VAR
+
+// Fuzzify input variable 'service': {'poor', 'fair' , 'good', 'excellent'}
+FUZZIFY color
+	TERM excellent := (30000, 1) (100000,0) ;
+	TERM better := (50000, 0) (1400000,1) (1800000,1) (2500000,0) ;
+	TERM good := (2300000, 0) (2800000,1) (3500000,1) (4000000,0) ;
+	TERM poor := (3800000,0) (4500000,1) (5000000,1) (10000000,0);
+	TERM verypoor := (7000000,0) (12000000,1) (15000000,1) (20000000,0);
+END_FUZZIFY
+
+
+// Defzzzify output variable 'weight' : {'range', 'range1', 'range2', 'range3' }
+DEFUZZIFY weight
+	TERM range1 := (0.5,0) (0.7,1) (0.8,0);
+	TERM range2 := (0.75,0) (1,1) (1.5,0);
+	TERM range3 := (1.25,0) (1.75,1) (2,0);
+
+	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
+	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
+END_DEFUZZIFY
+
+// Inference rules
+RULEBLOCK No1
+	AND : MIN;	// Use 'min' for 'and'
+	ACT : MIN;	// Use 'min' activation method
+	ACCU : MAX;	// Use 'max' accumulation method
+
+	RULE 1 : IF color IS excellent THEN weight IS range1;
+	RULE 2 : IF color IS better THEN weight IS range1;
+	RULE 3 : IF color IS good THEN weight IS range2;
+	RULE 4 : IF color IS poor THEN weight IS range3;
+	RULE 3 : IF color IS verypoor THEN weight IS range3;
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK

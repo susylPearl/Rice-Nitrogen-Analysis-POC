@@ -1,0 +1,74 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#cd0a0a"
+    tools:context="com.example.sushil.androidmaterialtest.MainActivity">
+
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_bar">
+
+    </include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/app_bar"
+        android:background="@drawable/main"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:gravity="center"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="26dp"
+                android:text="@string/description"
+                android:textColor="@color/primaryColorDark" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:weightSum="1">
+
+            <ImageView
+                android:id="@+id/picture"
+                android:layout_width="117dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="0.36"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/picture"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="33dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/description1"
+                android:textColor="@color/primaryColorDark" />
+
+            <Button
+                android:id="@+id/cropbtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#00796B"
+                android:gravity="center"
+                android:text="@string/crop_photo" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
